@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 
-function sendDate(req, res) {
+app.get('/api/:date?', (req, res) => {
   const dateParam = req.params.date;
   let date;
 
@@ -22,11 +22,7 @@ function sendDate(req, res) {
     unix: date.getTime(),
     utc: date.toUTCString()
   });
-}
-
-app.get('/api', sendDate);
-app.get('/api/', sendDate);
-app.get('/api/:date', sendDate);
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
